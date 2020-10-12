@@ -1,0 +1,29 @@
+{
+    "name": "codeceptjs-testmailapp-helper",
+    "version": "0.0.1",
+    "description": "Testmail.app (https://testmail.app) helper for email testing.",
+    "main": "index.js",
+    "scripts": {
+        "publish": "npm publish --access public"
+    },
+    "peerDependencies": {
+        "codeceptjs": "^2.6.8"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pavkam/codeceptjs-testmailapp-helper.git"
+    },
+    "author": "Alexandru Ciobanu <alex+git@ciobanu.org>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pavkam/codeceptjs-testmailapp-helper/issues"
+    },
+    "homepage": "https://github.com/pavkam/codeceptjs-testmailapp-helper#readme",
+    "dependencies": {
+        "chai": "^4.2.0",
+        "@testmail.app/graphql-request": "^1.8.4"
+    },
+    "devDependencies": {
+        "codeceptjs": "^2.6.8"
+    }
+}
