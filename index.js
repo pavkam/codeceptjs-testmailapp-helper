@@ -41,6 +41,8 @@ const sleep = (ms) => {
 
 const msInSecond = 1000;
 
+var emailPattern = new RegExp('([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)@inbox\.testmail\.app');
+
 /**
  * Adds support for end-to-end email testing using [Testmail.app](https://testmail.app/).
  * You need an account with Testmail.app to use this helper.
@@ -105,22 +107,29 @@ class TestMailAppInboxHelper extends Helper {
      * ```
      */
     async haveInbox(email) {
+
         let tag = randomString(this.tagLength);
         let namespace = this.config.namespace;
 
         if (email) {
-            match = email.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)@inbox\.testmail\.app/)[1];
-            if (match && match.length == 2) {
+            const match = emailPattern.exec(email);
+            if (match && match.length == 3) {
                 namespace = match[1];
                 tag = match[2];
+            } else {
+                throw new Error("Invalid email format supllied (must be namespace.tag@inbox.testmail.app).");
             }
         }
 
+        email = `${namespace}.${tag}@inbox.testmail.app`;
         this.lastUsedInbox = {
             tag: tag,
             namespace: namespace,
             timestamp: Date.now(),
-            email: `${this.config.namespace}.${tag}@inbox.testmail.app`
+            email: email,
+            toString: () => {
+                return email;
+            }
         }
 
         return this.lastUsedInbox;
@@ -145,7 +154,7 @@ class TestMailAppInboxHelper extends Helper {
 
         /* Prepare the timeout */
         if (!timeout) {
-            timeout = this.timeout;
+            timeout = this.defaultTimeout;
         } else {
             timeout *= msInSecond;
         }
@@ -205,7 +214,7 @@ class TestMailAppInboxHelper extends Helper {
      * ```
      */
     async receiveEmail(inbox, timeout) {
-        const emails = await receiveEmail(inbox, timeout);
+        const emails = await this.receiveEmails(inbox, timeout);
         return emails[0];
     }
 }

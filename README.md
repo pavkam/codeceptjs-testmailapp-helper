@@ -20,7 +20,7 @@ helpers: {
   Testmail: {
     apiKey: '<testmail.app API key>',
     namespace: '<testmail.app namespace>',
-    require: '@codeceptjs/mailslurp-helper'
+    require: 'codeceptjs-testmailapp-helper'
   },
 }
 ```
@@ -44,12 +44,12 @@ assert(email.from === "Notifications <notify@company.com>");
 
 ## Functions
 
-The helper exposes only three functions you should care about.
+The helper exposes only three functions you should care about. They are listed below.
 
 ### `haveInbox()`
 
 Creates a new inbox. The email address is generated using the account namespace, a random tag and the standard testmail.app domain.
-The function return an `inbox` object that you can use later in the other functions.
+The function returns an `inbox` object that you can use later in the other functions.
 
 Example:
 
@@ -63,9 +63,9 @@ I.say(`The new email is ${inbox.email}.`);
 ### `haveInbox(email)`
 
 Re-creates an inbox from a given email address. The email address is expected to be using the same account namespace, a tag and the standard testmail.app domain.
-The function return an `inbox` object that you can use later in the other two functions.
+The function return an `inbox` object that you can use later in the other functions.
 
-This function is useful to send read emails for previously created accounts.
+This function is useful to when receiving emails for previously created accounts.
 
 Example:
 
@@ -78,8 +78,10 @@ I.say(`The new email is ${inbox.email}.`);
 
 ### `receiveEmails()`
 
-Waits for all new emails since last call to `receiveEmails()`. Note that calling this function without an inbox will assume the emails are waited for
-the inbox that was last created using `haveInbox()` function.
+Waits and returns all new emails since the last call to `receiveEmails()`. Note that calling this function without an inbox argument will assume the 
+emails are loaded for the inbox that was last created using `haveInbox()` function.
+
+If no emails are retrieved in the given timeout period, an error is raised.
 
 Example:
 
@@ -95,6 +97,8 @@ assert(emails[0].from === "me");
 Waits for all new emails since last call to `receiveEmails()` for a given inbox. The inbox has to be created beforehand using the `haveInbox()` function.
 You can supply a timeout (in seconds) as the last argument to this function.
 
+If no emails are retrieved in the given timeout period, an error is raised.
+
 Example:
 
 ```js
@@ -108,7 +112,9 @@ assert(emails[0].from === "me");
 
 ### `receiveEmail()` / `receiveEmail(inbox, [timeout])`
 
-And because, waiting for multiple emails is not that useful, there is a version of the function that only returns the first email.
+And, because waiting for multiple emails is not very useful, there is a version of the function that only returns the latest received email.
+
+If no emails are retrieved in the given timeout period, an error is raised.
 
 Example:
 
