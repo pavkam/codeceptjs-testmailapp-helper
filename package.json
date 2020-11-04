@@ -1,13 +1,13 @@
 {
     "name": "codeceptjs-testmailapp-helper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Testmail.app (https://testmail.app) helper for email testing.",
     "main": "index.js",
     "scripts": {
         "publish": "npm publish --access public"
     },
     "peerDependencies": {
-        "codeceptjs": "3.0.1"
+        "codeceptjs": "3"
     },
     "repository": {
         "type": "git",
@@ -30,6 +30,6 @@
         "@testmail.app/graphql-request": "1.8.4"
     },
     "devDependencies": {
-        "codeceptjs": "3.0.1"
+        "codeceptjs": "3"
     }
 }
