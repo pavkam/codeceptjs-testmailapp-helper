@@ -7,7 +7,7 @@
         "publish": "npm publish --access public"
     },
     "peerDependencies": {
-        "codeceptjs": "^2.6.8"
+        "codeceptjs": "3.0.1"
     },
     "repository": {
         "type": "git",
@@ -27,9 +27,9 @@
     ],
     "homepage": "https://github.com/pavkam/codeceptjs-testmailapp-helper#readme",
     "dependencies": {
-        "@testmail.app/graphql-request": "^1.8.4"
+        "@testmail.app/graphql-request": "1.8.4"
     },
     "devDependencies": {
-        "codeceptjs": "^2.6.8"
+        "codeceptjs": "3.0.1"
     }
 }
