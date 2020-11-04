@@ -27,8 +27,8 @@ const { GraphQLClient } = require('@testmail.app/graphql-request');
 /* Random function to generate the tags.*/
 const randomCharSet = '0123456789abcdefghijklmnopqrstuvwxyz';
 const randomString = (length) => {
-    var result = '';
-    for (var i = length; i > 0; --i) {
+    let result = '';
+    for (let i = length; i > 0; --i) {
         result += randomCharSet[Math.floor(Math.random() * randomCharSet.length)];
     }
     return result;
@@ -40,34 +40,33 @@ const sleep = (ms) => {
 }
 
 const msInSecond = 1000;
-
-var emailPattern = new RegExp('([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)@inbox\.testmail\.app');
+let emailPattern = new RegExp('([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)@inbox\.testmail\.app');
 
 /**
  * Adds support for end-to-end email testing using [Testmail.app](https://testmail.app/).
  * You need an account with Testmail.app to use this helper.
- * 
+ *
  * The minimum configuration for this helper looks as follows:
- * 
+ *
  * ```js
  * helpers: {
- *   MailSlurp: {
+ *   Testmail: {
  *     apiKey: '<testmail.app API key>',
  *     namespace: '<testmail.app namespace>',
- *     require: 'codeceptjs-testmailapp-helper'    
+ *     require: 'codeceptjs-testmailapp-helper'
  *   },
  * }
  * ```
  * > Use .env file and environment variables to store sensitive data like API keys
- * 
+ *
  * ## Configuration
- * 
+ *
  * * `apiKey` (required) - API key from testmail.app service.
  * * `namespace` (required) - namespace from testmail.app service.
  * * `sleepDelay` (default: 5) - time to wait between trying to load emails (in seconds).
  * * `defaultTimeout` (default: 240) - time to wait for emails (in seconds).
  * * `tagLength` (default: 8) - the length of your randomly generated tags (format: [a-Z0-9]+).
- * 
+ *
  */
 class TestMailAppInboxHelper extends Helper {
 
@@ -95,9 +94,9 @@ class TestMailAppInboxHelper extends Helper {
      * Defines/creates a new inbox by generating a new tag.
      * If `email` argument is supplied, it is used to create the inbox. The format of the email
      * should be as follows: `namespace.tag@inbox.testmail.app`.
-     * 
+     *
      * The function returns the new inbox and also sets it as "current".
-     * 
+     *
      * ```js
      * const inbox = await I.haveInbox();
      * ```
@@ -105,6 +104,9 @@ class TestMailAppInboxHelper extends Helper {
      * ```js
      * const inbox = await I.haveInbox("abcde.123456789@inbox.testmail.app");
      * ```
+     *
+     * @param {string?} email to  create the inbox
+     *
      */
     async haveInbox(email) {
 
@@ -117,7 +119,7 @@ class TestMailAppInboxHelper extends Helper {
                 namespace = match[1];
                 tag = match[2];
             } else {
-                throw new Error("Invalid email format supllied (must be namespace.tag@inbox.testmail.app).");
+                throw new Error("Invalid email format supplied (must be namespace.tag@inbox.testmail.app).");
             }
         }
 
@@ -139,9 +141,9 @@ class TestMailAppInboxHelper extends Helper {
      * Receives all new emails since last call to `receiveEmails` for the given inbox.
      * If `timeout` argument is supplied, it will override the default timeout (in seconds).
      * If the `inbox` argument is not supplied, the last created inbox will be used.
-     * 
+     *
      * If no emails are received, an error is raised.
-     * 
+     *
      * ```js
      * const emails = await I.receiveEmails();
      * ```
@@ -149,6 +151,10 @@ class TestMailAppInboxHelper extends Helper {
      * ```js
      * const emails = await I.receiveEmails(inbox, 100);
      * ```
+     *
+     * @param {*} inbox
+     * @param {number?} timeout
+     *
      */
     async receiveEmails(inbox, timeout) {
 
@@ -202,9 +208,9 @@ class TestMailAppInboxHelper extends Helper {
      * Receives all the first new email since last call to `receiveEmail` for the given inbox.
      * If `timeout` argument is supplied, it will override the default timeout (in seconds).
      * If the `inbox` argument is not supplied, the last created inbox will be used.
-     * 
+     *
      * If no emails are received, an error is raised.
-     * 
+     *
      * ```js
      * const email = await I.receiveEmail();
      * ```
@@ -212,6 +218,10 @@ class TestMailAppInboxHelper extends Helper {
      * ```js
      * const email = await I.receiveEmail(inbox, 100);
      * ```
+     *
+     * @param {*} inbox
+     * @param {number?} timeout
+     *
      */
     async receiveEmail(inbox, timeout) {
         const emails = await this.receiveEmails(inbox, timeout);
