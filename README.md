@@ -134,6 +134,11 @@ The email object consists from the following properties:
     from,
     subject,
     html,
-    text
+    text,
+    attachments {
+      filename
+      contentType
+      downloadUrl
+    }
 }
 ```

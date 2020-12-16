@@ -198,6 +198,11 @@ class TestMailAppInboxHelper extends Helper {
                         subject
                         html
                         text
+                        attachments {
+                          filename
+                          contentType
+                          downloadUrl
+                        }
                     }
                 }
             }`);
