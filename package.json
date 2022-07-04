@@ -1,10 +1,11 @@
 {
     "name": "codeceptjs-testmailapp-helper",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Testmail.app (https://testmail.app) helper for email testing.",
     "main": "index.js",
     "scripts": {
-        "publish": "npm publish --access public"
+        "ci": "echo Ignored",
+        "test": "echo Ignored"
     },
     "peerDependencies": {
         "codeceptjs": "3"
