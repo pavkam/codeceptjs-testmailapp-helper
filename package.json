@@ -2,10 +2,14 @@
     "name": "codeceptjs-testmailapp-helper",
     "version": "1.1.1",
     "description": "Testmail.app (https://testmail.app) helper for email testing.",
-    "main": "index.js",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "ci": "echo Ignored",
-        "test": "echo Ignored"
+        "test": "echo Ignored",
+        "tsc": "tsc -d",
+        "lint": "biome lint src && biome format src",
+        "lint:fix": "biome check src --apply-unsafe && biome format src --write"
     },
     "peerDependencies": {
         "codeceptjs": "3"
@@ -28,9 +32,15 @@
     ],
     "homepage": "https://github.com/pavkam/codeceptjs-testmailapp-helper#readme",
     "dependencies": {
-        "@testmail.app/graphql-request": "1.8.4"
+        "@testmail.app/graphql-request": "1.8.4",
+        "typescript": "5.5.2"
     },
     "devDependencies": {
-        "codeceptjs": "3"
-    }
+        "codeceptjs": "3",
+        "@biomejs/biome": "1.5.3"
+    },
+    "files": [
+        "dist/*",
+        "README.md"
+    ]
 }

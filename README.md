@@ -17,7 +17,7 @@ Add the helper to your `codecept.conf.js` file:
 
 ```js
 helpers: {
-  Testmail: {
+  TestmailHelper: {
     apiKey: '<testmail.app API key>',
     namespace: '<testmail.app namespace>',
     require: 'codeceptjs-testmailapp-helper'
