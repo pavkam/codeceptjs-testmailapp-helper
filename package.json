@@ -33,11 +33,11 @@
     "homepage": "https://github.com/pavkam/codeceptjs-testmailapp-helper#readme",
     "dependencies": {
         "@testmail.app/graphql-request": "1.8.4",
-        "typescript": "5.5.2"
+        "typescript": "5.6.3"
     },
     "devDependencies": {
         "codeceptjs": "3",
-        "@biomejs/biome": "1.5.3"
+        "@biomejs/biome": "1.9.4"
     },
     "files": [
         "dist/*",
